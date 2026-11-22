@@ -11,7 +11,7 @@ window.CONFIG = {
   PIXEL_ID: "28165559309792835", // pixel PROSPE (conta de anúncios 02), escolhido pelo Victor em 22/11
 
   // UTMify: o valor de window.pixelId que aparece no código do pixel do UTMify.
-  UTMIFY_PIXEL_ID: "PREENCHER",
+  UTMIFY_PIXEL_ID: "6b033c548d2ea0bfb5315503", // pixel da UTMify (22/11)
 
   // Link do checkout da Cakto do produto principal (Prato Ponte, R$ 27).
   CHECKOUT_URL: "https://pay.cakto.com.br/w7damjg_1356829",
