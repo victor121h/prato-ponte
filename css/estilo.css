@@ -745,3 +745,8 @@ cakto-upsell-reject::part(button) {
 /* Logo do produto (22/11): no título da oferta e no topo da página de obrigado */
 .oferta-logo img { display: block; width: 210px; max-width: 62%; height: auto; margin: 0 auto; }
 .obrigado .obrigado-logo { display: block; width: 150px; max-width: 46%; height: auto; margin: 0 auto 18px; }
+
+/* Logo no topo do quiz (capa, perguntas, carregamento e resultado). As telas descontam a altura dela para a capa continuar cabendo em 390×844 */
+.topo-marca { display: flex; justify-content: center; padding: 12px 0 2px; position: relative; z-index: 1; }
+.topo-marca img { display: block; height: 40px; width: auto; }
+.topo-marca ~ .capa, .topo-marca ~ .quiz, .topo-marca ~ .carregando { min-height: calc(100vh - 54px); min-height: calc(100svh - 54px); }
