@@ -8,7 +8,7 @@
    ===================================================================== */
 window.CONFIG = {
   // Meta (Facebook): Gerenciador de Eventos > sua fonte de dados > ID do pixel (só números).
-  PIXEL_ID: "PREENCHER",
+  PIXEL_ID: "28165559309792835", // pixel PROSPE (conta de anúncios 02), escolhido pelo Victor em 22/11
 
   // UTMify: o valor de window.pixelId que aparece no código do pixel do UTMify.
   UTMIFY_PIXEL_ID: "PREENCHER",
