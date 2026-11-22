@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Teste do Prato Ponte · Teste gratuito</title>
+  <meta name="description" content="Teste gratuito de 2 minutos: descubra por onde começar para a criança aceitar legumes, de acordo com a idade e com o que ela já come.">
+  <meta name="theme-color" content="#FBF6EC">
+  <meta property="og:title" content="Teste do Prato Ponte · Teste gratuito">
+  <meta property="og:description" content="Veja as 3 primeiras pontes do seu filho: do que ele já come bem até o alimento que ele ainda recusa.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A5%95%3C/text%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="image" href="img/prato-ponte.svg" fetchpriority="high">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Figtree:wght@400;600;700;800&display=swap">
+  <link rel="stylesheet" href="css/estilo.css">
+
+  <!-- Quem recarrega no meio do quiz volta para a tela onde parou (sem piscar a capa) -->
+  <style>.restaurando #tela-capa { visibility: hidden; }</style>
+  <script>
+    try {
+      var s = JSON.parse(localStorage.getItem('pp_quiz_v1') || 'null');
+      if (s && s.tela > 0) {
+        document.documentElement.className += ' restaurando';
+        setTimeout(function () { document.documentElement.classList.remove('restaurando'); }, 3000);
+      }
+    } catch (e) {}
+  </script>
+
+  <!-- UTMify: UTMs -->
+  <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
+
+  <script src="config.js" defer></script>
+  <script src="js/rastreio.js" defer></script>
+  <script src="js/quiz.js" defer></script>
+</head>
+<body>
+  <main class="pagina">
+
+    <!-- ===================== ETAPA 1 · CAPA ===================== -->
+    <section id="tela-capa" class="capa" aria-labelledby="capa-titulo">
+      <span class="selo"><span aria-hidden="true">⏱</span> Teste gratuito · 2 minutos</span>
+      <h1 id="capa-titulo">Descubra <span class="marca-texto">por onde começar</span> para a criança aceitar legumes, de acordo com a idade e com o que ela já come</h1>
+      <p class="subtitulo">Responda perguntas rápidas sobre a rotina e veja as <strong>3 primeiras pontes</strong> do seu filho: do que ele já come bem até o alimento que ele ainda recusa.</p>
+      <div class="midia capa-midia">
+        <div class="prato-wrap">
+          <img src="img/prato-ponte.svg" alt="Prato infantil visto de cima: arroz de um lado, palitinhos de cenoura do outro, ligados por uma linha pontilhada azul" width="1000" height="1000" fetchpriority="high" decoding="async">
+          <span class="etiqueta etiqueta--segura" aria-hidden="true"><span class="bola"></span>Já come bem</span>
+          <span class="etiqueta etiqueta--pontinha" aria-hidden="true"><span class="bola"></span>Ainda recusa</span>
+        </div>
+      </div>
+      <button id="btn-comecar" class="btn btn--pulso" type="button">COMEÇAR MEU TESTE GRATUITO</button>
+      <p class="nota">Para mães e pais de crianças de 2 a 6 anos. O teste é gratuito; no final você pode, se quiser, levar o cardápio completo.</p>
+      <p class="miuda">Material educativo. Não substitui o pediatra.</p>
+    </section>
+
+    <!-- ===================== PERGUNTAS (montadas pelo js/quiz.js) ===================== -->
+    <section id="tela-quiz" class="quiz" hidden>
+      <div class="quiz-topo">
+        <button class="voltar" id="btn-voltar" type="button" aria-label="Voltar para a tela anterior">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+        </button>
+        <div class="progresso" role="progressbar" aria-label="Progresso do teste" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <span id="progresso-barra"></span>
+        </div>
+      </div>
+      <div class="quiz-conteudo" id="quiz-conteudo"></div>
+    </section>
+
+    <!-- ===================== CARREGAMENTO ===================== -->
+    <section id="tela-carregando" class="carregando" hidden aria-live="polite">
+      <div class="anel" aria-hidden="true"></div>
+      <ul class="passos-carregando">
+        <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>Separando as comidas seguras...</span></li>
+        <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span id="carregando-alvo">Montando as pontes até os alimentos novos...</span></li>
+        <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span id="carregando-idade">Ajustando o cardápio para a idade da criança...</span></li>
+      </ul>
+    </section>
+
+    <!-- ===================== RESULTADO + MINI VSL + OFERTA ===================== -->
+    <section id="tela-resultado" class="resultado" hidden>
+      <h1 id="res-titulo" tabindex="-1">As 3 primeiras pontes do seu filho estão prontas</h1>
+
+      <div class="mapa">
+        <h2>O que o seu teste mostra</h2>
+        <ul>
+          <li><span class="ic" aria-hidden="true">👶</span><span><strong>Idade:</strong> <span id="res-idade"></span></span></li>
+          <li><span class="ic" aria-hidden="true">🟢</span><span><strong>Já come bem:</strong> <span id="res-come"></span></span></li>
+          <li><span class="ic" aria-hidden="true">🎯</span><span><strong>Você quer chegar em:</strong> <span id="res-alvos"></span></span></li>
+          <li><span class="ic" aria-hidden="true">🔔</span><span>Nessa idade, isso é esperado: é o <strong>Alarme do Novo</strong>.</span></li>
+          <li><span class="ic" aria-hidden="true">🌉</span><span><strong>O que vai mudar a sua mesa:</strong> o novo chegar colado no que a criança já come, várias vezes, sem pressão.</span></li>
+        </ul>
+        <p class="aviso-idade" id="res-aviso-idade" hidden>O Prato Ponte foi feito para crianças de 2 a 6 anos. Com crianças maiores, a ideia da ponte também ajuda, mas o cardápio não foi pensado para essa idade.</p>
+      </div>
+
+      <h2 class="pontes-titulo">As suas 3 primeiras pontes</h2>
+      <div class="pontes" id="res-pontes"></div>
+      <p class="repeticoes">Sem esconder e sem forçar: você conta o que tem no prato, e ninguém obriga a comer. Pesquisas mostram que muitas crianças precisam encontrar o mesmo alimento várias vezes (de 8 a 15) até aceitar. O cardápio completo já faz essas repetições por você.</p>
+      <p class="caixa-azul" id="res-pediatra" hidden></p>
+
+      <p class="vsl-intro">Assista: a Lívia explica como usar as suas pontes</p>
+      <div class="midia vsl" id="vsl" data-ph="Vídeo da Lívia">
+        <video id="vsl-video" playsinline webkit-playsinline muted loop preload="none" aria-label="Vídeo da Lívia sobre o Prato Ponte"></video>
+        <button class="vsl-toque" id="vsl-toque" type="button" aria-label="Pausar o vídeo" hidden>
+          <span class="icone-play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg></span>
+        </button>
+        <button class="vsl-som" id="vsl-som" type="button"><span><span aria-hidden="true">🔊</span> Toque para ouvir</span></button>
+        <div class="vsl-barra" id="vsl-barra" hidden><span id="vsl-progresso"></span></div>
+        <p class="vsl-aviso" id="vsl-erro" hidden>O vídeo não carregou agora. A oferta já está logo abaixo.</p>
+      </div>
+
+      <div class="ler-oferta" id="ler-oferta">
+        <button class="link-discreto" id="btn-ler-oferta" type="button">Prefere ler? Ver a oferta agora</button>
+      </div>
+
+      <!-- Oferta: abre aos 229 s de vídeo com som (preço), 235 s depois do resultado ou pelo link acima -->
+      <div id="oferta" hidden>
+        <div class="caixa-preco" id="oferta-topo">
+          <h2 class="so-leitor">Oferta</h2>
+          <p><strong>Prato Ponte completo</strong></p>
+          <div class="valor"><small>R$</small>27</div>
+          <p class="condicao">Pagamento único · Pix ou cartão</p>
+          <a class="btn btn--pulso" data-checkout href="#"><span>QUERO MEU PRATO PONTE</span></a>
+          <p class="miudo">Acesso no seu e-mail logo após o pagamento · Garantia de 7 dias</p>
+        </div>
+
+        <div class="midia midia--quadrada midia--contain oferta-mockup" data-ph="img/mockup.png">
+          <img src="img/mockup.png" alt="Prato Ponte: o cardápio no celular e a folha impressa na geladeira" width="1000" height="1000" loading="lazy" decoding="async" onerror="this.remove()">
+        </div>
+        <h2 class="oferta-titulo">Prato Ponte</h2>
+        <p class="oferta-sub">O cardápio de 4 semanas para crianças de 2 a 6 anos, com as pontes prontas do que a criança já come até os alimentos que ela ainda recusa, mais a lista de compras e as frases para a mesa.</p>
+
+        <section class="secao">
+          <h2>O que você recebe</h2>
+          <ul class="lista-check">
+            <li><strong>Comece por aqui (montado com as suas respostas):</strong> a versão do cardápio para <span id="oferta-faixa">a idade da criança</span>, as 3 primeiras pontes, tiradas do que a criança já come e do que você quer que ela aceite, e as receitas da semana 1 <span id="oferta-tempo">que cabem no seu tempo de cozinha</span>.</li>
+            <li><strong>Cardápio Ponte de 4 semanas</strong>, na versão da idade: café da manhã, almoço, lanche da tarde e jantar, com medidas caseiras. A base é arroz, feijão e comida de verdade, como pede o Guia Alimentar para a População Brasileira. Cada refeição marca a comida segura (🟢) e a pontinha do dia (🟠).</li>
+            <li><strong>36 pontes prontas:</strong> 3 pontes para cada um dos 12 alimentos mais recusados, partindo das comidas seguras mais comuns.</li>
+            <li><strong>Lista de compras de cada semana</strong>, separada por seção do mercado.</li>
+            <li><strong>20 receitas-ponte</strong> de até 20 minutos.</li>
+            <li><strong>Frases para a mesa:</strong> 15 frases para usar no lugar de “só mais uma colherada” e o que dizer quando a criança recusa.</li>
+            <li><strong>Diário das pontes:</strong> uma tabela para marcar cada vez que a pontinha apareceu e como a criança reagiu (👀 olhou, ✋ tocou, 👅 provou, 😋 comeu). Para você ver o avanço, que às vezes é só olhar.</li>
+            <li><strong>Quando procurar o pediatra:</strong> os sinais de alerta, explicados.</li>
+          </ul>
+          <div class="chips" id="chips-alimentos" aria-label="Os 12 alimentos com pontes prontas"></div>
+          <p class="chips-legenda" id="chips-legenda" hidden>Os 12 alimentos com pontes prontas. Em amarelo, com ✓: os que você marcou no teste.</p>
+          <p class="formato">📱 Tudo na área de membros, para ler no celular, e em PDF para imprimir o cardápio e a lista e colar na geladeira.</p>
+        </section>
+
+        <section class="secao">
+          <h2>Como funciona: Prato Ponte em 3 passos</h2>
+          <div class="passos3">
+            <div class="passo3"><h3>Comida segura 🟢</h3><p>Todo prato tem pelo menos um alimento que a criança já come bem. Assim, o alarme fica quieto.</p></div>
+            <div class="passo3"><h3>Pontinha 🟠</h3><p>O alimento novo entra pequeno, parecido e colado no conhecido. Sem esconder: você conta que tem.</p></div>
+            <div class="passo3"><h3>Repetir sem pressão 🔁</h3><p>A mesma pontinha volta em outros dias, de outro jeito, e ninguém obriga a comer. O cardápio já faz as repetições.</p></div>
+          </div>
+        </section>
+
+        <section class="secao">
+          <h2>Para quem é (e para quem não é)</h2>
+          <div class="dupla">
+            <div class="cartao cartao--sim"><h3>Para quem é</h3><p>Mães e pais de crianças de 2 a 6 anos que comem sempre as mesmas coisas e recusam legumes.</p></div>
+            <div class="cartao cartao--nao"><h3>Para quem não é</h3><p>Não é tratamento. Se a criança tem alergia, autismo, dificuldade para engolir ou está perdendo peso, o caminho é o pediatra e um nutricionista.</p></div>
+          </div>
+        </section>
+
+        <section class="secao">
+          <h2>Por que é tão barato?</h2>
+          <p>É digital e a gente quer que caiba no bolso de qualquer mãe.</p>
+        </section>
+
+        <div class="caixa-preco">
+          <p><strong>Prato Ponte completo</strong></p>
+          <div class="valor"><small>R$</small>27</div>
+          <p class="condicao">Pagamento único · Pix ou cartão</p>
+          <a class="btn" data-checkout href="#"><span>QUERO MEU PRATO PONTE</span></a>
+          <p class="miudo">Sem mensalidade. Acesso vitalício.</p>
+        </div>
+
+        <div class="garantia">
+          <div class="selo-7" aria-hidden="true"><b>7</b><span>DIAS</span></div>
+          <p><strong>Garantia de 7 dias.</strong> Se não gostar, é só pedir o reembolso dentro desse prazo e você recebe o valor de volta.</p>
+        </div>
+
+        <section class="secao">
+          <h2>Perguntas frequentes</h2>
+          <div class="faq">
+            <details>
+              <summary>Como eu recebo?</summary>
+              <p>Assim que o pagamento é aprovado, o acesso chega no e-mail que você usar na compra. Quem envia é a Cakto, a plataforma de pagamento. No cartão é na hora; no Pix, logo depois da confirmação. Dá para ler tudo no celular e imprimir o PDF.</p>
+            </details>
+            <details>
+              <summary>Serve para qual idade?</summary>
+              <p>Para crianças de 2 a 6 anos. O cardápio tem duas versões: uma para 2 a 3 anos e outra para 4 a 6 anos.</p>
+            </details>
+            <details>
+              <summary>É um cardápio personalizado?</summary>
+              <p>O “Comece por aqui” é montado com as suas respostas: a versão da idade, as 3 primeiras pontes e as receitas da semana 1 que cabem no seu tempo. O cardápio de 4 semanas é o mesmo para todas as crianças da mesma faixa de idade e não é uma prescrição individual. Para um plano individual, o caminho é a consulta com um nutricionista.</p>
+            </details>
+            <details>
+              <summary>Quem montou o cardápio?</summary>
+              <p>O cardápio foi montado a partir dos guias alimentares do Ministério da Saúde (o Guia Alimentar para a População Brasileira e o Guia Alimentar para Crianças Brasileiras Menores de 2 Anos) e das orientações da Sociedade Brasileira de Pediatria. Conteúdo revisado por: <span data-revisora>[NOME DA NUTRICIONISTA, CRN — PREENCHER]</span>.</p>
+            </details>
+            <details>
+              <summary>Precisa de ingrediente caro?</summary>
+              <p>Não. A base é arroz, feijão, legumes, frutas, ovo e carnes do dia a dia, o que tem em qualquer mercado ou feira. A lista de compras de cada semana já vem pronta.</p>
+            </details>
+            <details>
+              <summary>Meu filho tem alergia, autismo ou outra condição, serve?</summary>
+              <p>O Prato Ponte não é tratamento e não foi feito para esses casos. Se a criança tem alergia, autismo, dificuldade para engolir ou está perdendo peso, procure o pediatra e um nutricionista: são eles que podem avaliar e orientar.</p>
+            </details>
+            <details>
+              <summary>É assinatura?</summary>
+              <p data-faq-preco>Não. É um pagamento único de R$ 27, sem mensalidade.</p>
+            </details>
+            <details>
+              <summary>E se eu não gostar?</summary>
+              <p>Você tem 7 dias de garantia. Se não gostar, pede o reembolso dentro desse prazo e recebe o valor de volta.</p>
+            </details>
+          </div>
+        </section>
+
+        <div class="caixa-preco">
+          <div class="valor"><small>R$</small>27</div>
+          <p class="condicao">Pagamento único · Pix ou cartão</p>
+          <a class="btn" data-checkout href="#"><span>QUERO MEU PRATO PONTE</span></a>
+        </div>
+      </div>
+
+      <!-- Sinais de alerta: sempre visíveis, com ou sem a oferta aberta -->
+      <section class="alerta" id="alerta" aria-labelledby="alerta-titulo">
+        <h2 id="alerta-titulo"><span aria-hidden="true">⚠️</span> Sinais de alerta</h2>
+        <ul>
+          <li>Dor ao comer</li>
+          <li>Engasgo ou tosse frequente na hora de comer</li>
+          <li>Vômitos</li>
+          <li>Perda de peso ou parada no crescimento</li>
+          <li>Recusa de grupos inteiros de alimentos</li>
+          <li>Criança abatida</li>
+        </ul>
+        <p>Se aparecer algum, procure o pediatra antes de qualquer cardápio.</p>
+      </section>
+
+      <p class="ler-oferta"><button class="link-discreto" id="btn-refazer" type="button">Refazer o teste</button></p>
+    </section>
+
+    <!-- ===================== RODAPÉ ===================== -->
+    <footer class="rodape">
+      <p>A Lívia, apresentadora do vídeo, é uma personagem criada com inteligência artificial e não é nutricionista. O Prato Ponte é um material educativo montado a partir do Guia Alimentar para a População Brasileira e do Guia Alimentar para Crianças Brasileiras Menores de 2 Anos (Ministério da Saúde) e das orientações da Sociedade Brasileira de Pediatria. <strong>Conteúdo revisado por: <span data-revisora>[NOME DA NUTRICIONISTA, CRN — PREENCHER]</span>.</strong> Não substitui a consulta com pediatra ou nutricionista.</p>
+      <p>Fontes: Ministério da Saúde, Guia Alimentar para Crianças Brasileiras Menores de 2 Anos (2019), p. 130–131 e 197–198 · Ministério da Saúde, Guia Alimentar para a População Brasileira (2014) · Sociedade Brasileira de Pediatria, Manual de Alimentação, Departamento Científico de Nutrologia (2018) · Revisão sistemática sobre neofobia alimentar, Revista Paulista de Pediatria (2020) · Dovey e colegas, Appetite (2008) · Wardle e colegas (2003), exposição repetida · Fraker e colegas (2007), encadeamento de alimentos.</p>
+      <p class="cvv">Se você sente que está no seu limite, você pode conversar com o CVV pelo <a href="tel:188">188</a>, de graça, 24 horas.</p>
+      <p data-suporte-linha>Suporte: <a data-suporte-email href="#">e-mail de suporte</a></p>
+      <p>© 2026 Prato Ponte · Pagamento processado pela Cakto.</p>
+    </footer>
+  </main>
+</body>
+</html>
