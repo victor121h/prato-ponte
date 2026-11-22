@@ -640,6 +640,9 @@ p { margin: 0; }
   font-weight: 800; font-size: 14.5px; text-align: center;
 }
 .para-quem { margin-top: 14px; }
+.por-que-agora { margin-top: 14px; padding: 16px; border-radius: 16px; background: var(--milho-claro); border: 2px solid #F1CF6B; }
+.por-que-agora h3 { font-size: 19px; }
+.por-que-agora p { margin-top: 6px; font-size: 15.5px; }
 .upsell { padding: 22px 0 8px; }
 .upsell h1 { font-size: 27px; text-align: center; }
 .upsell .lead { margin-top: 10px; text-align: center; font-size: 16.5px; }
