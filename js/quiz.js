@@ -18,7 +18,9 @@
   var OFERTA_NO_VIDEO_S = 187;   // segundos de vídeo assistido COM SOM
   var OFERTA_NA_PAGINA_S = 210;  // segundos desde que o resultado apareceu
   var PRECO = 27;
-  var VIDEO_SRC = 'video/vsl.mp4';
+  /* O vídeo vem do GitHub Pages, que entrega em pedaços (HTTP 206). O estático do Replit
+     manda o arquivo inteiro (200) e aí a VSL não toca no iPhone nem no navegador do Instagram. */
+  var VIDEO_SRC = 'https://victor121h.github.io/prato-ponte/video/vsl.mp4';
   var VIDEO_POSTER = 'img/livia-poster.jpg';
 
   var ICONE_CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
