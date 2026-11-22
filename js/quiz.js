@@ -11,12 +11,12 @@
   };
   var CHAVE = 'pp_quiz_v1';
 
-  /* Tempos da oferta. Narração final (audio/mini-vsl-livia.mp3): 257 s (4:17).
-     A Lívia começa a oferta aos 190 s ("Você recebe...") e fala o preço aos ~229 s
-     ("são só vinte e sete reais"). Abre o que vier primeiro. Se a edição do vídeo
-     mudar o tempo da fala, ajuste aqui. */
-  var OFERTA_NO_VIDEO_S = 229;   // segundos de vídeo assistido COM SOM
-  var OFERTA_NA_PAGINA_S = 235;  // segundos desde que o resultado apareceu
+  /* Tempos da oferta. Vídeo editado (video/vsl.mp4): 256,8 s (4:17), conferido pela transcrição.
+     A Lívia começa a apresentar o Prato Ponte aos 187 s ("Foi pra isso que a gente criou
+     o Prato Ponte. Você recebe...") e fala o preço aos ~230 s. Abre o que vier primeiro.
+     Mesmo critério dos produtos 1 e 3: a oferta aparece quando a apresentação começa. */
+  var OFERTA_NO_VIDEO_S = 187;   // segundos de vídeo assistido COM SOM
+  var OFERTA_NA_PAGINA_S = 210;  // segundos desde que o resultado apareceu
   var PRECO = 27;
   var VIDEO_SRC = 'video/vsl.mp4';
   var VIDEO_POSTER = 'img/livia-poster.jpg';
